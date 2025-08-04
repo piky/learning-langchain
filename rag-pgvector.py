@@ -14,7 +14,7 @@ conn = psycopg2.connect(
     port="5432"
 )
 
-# cur = conn.cursor()
+cur = conn.cursor()
 # cur.execute("""
 #     CREATE TABLE IF NOT EXISTS documents (
 #         id SERIAL PRIMARY KEY,
@@ -50,9 +50,10 @@ conn = psycopg2.connect(
 # """)
 
 # conn.commit()
-
+ 
 embedder = SentenceTransformer("BAAI/bge-m3")
-embedding = embedder.encode("วิทยาลัยนวัตกรรมดิจิทัลเทคโนโลยี มหาวิทยาลัยรังสิตเปิดหลักสูตรปริญญาตรี 5 สาขา").tolist()
 
-print(embedding)
-print(len(embedding))
+def add_document(text):
+    embedding = embedder.encode(text).tolist()
+    cur.execute("INSERT INTO documents (content, embedding) VALUES (%s, %s)", (text, embedding))
+    conn.commit()
