@@ -2,10 +2,13 @@
 
 ## Pre-requisites
 API Keys for the following services are required:
+ - Github Model Token with `permissions: read` in model scope
  - OpenRouter (URL: https://openrouter.ai/api/v1)
- - Tavily
+ - Tavily 
 ### Create a `.env` file in the root directory with the following content:
 ```plaintext
+GITHUB_MODEL_ENDPOINT=https://models.github.ai/inference
+GITHUB_MODEL_TOKEN=<your_github_model_token>
 OPENROUTER_BASE_URL=https://openrouter.ai/api/v1
 OPENROUTER_API_KEY=<your_openrouter_api_key>
 TAVILY_API_KEY=<your_tavily_api_key>
